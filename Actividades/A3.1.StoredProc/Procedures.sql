@@ -29,4 +29,20 @@ END $$
 delimiter ;
 
 --Ejercicio 3 primer y ultimo productos por precio 
+delimiter$$
+create procedure show_price()
+BEGIN
+    declare caro int default 0; 
+    declare barato int default 0; 
 
+    Select * from products as caro
+    order by buyPrice DESC LIMIT 1;
+
+    Select * from products as barato;
+    order by buyPrice ASC LIMIT 1;
+
+    select caro;
+    select barato;
+
+END$$
+delimiter$$
