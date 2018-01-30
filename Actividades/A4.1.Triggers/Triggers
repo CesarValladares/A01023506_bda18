@@ -1,7 +1,0 @@
-TRRIGER 1
-
-create trigger update_aumento before update on EMPLOYEE referencing old as old_values new as new_values for each row mode db2sql when (new_values.salary > old_values.salary * 1.3) begin atomic set new_values.salary = old_values.salary; end
-
-TRIGGER 2
-
-TRIGGER 3
