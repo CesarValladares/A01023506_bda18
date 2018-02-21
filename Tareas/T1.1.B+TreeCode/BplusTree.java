@@ -85,10 +85,24 @@ public class BplusTree{
 
     public void newNum(Integer num, BplusTree a){
         
-        if (a.getleaf() == true){
-            
+        if (a.getleaf() != true){
+            if ( num < a.getValor1() && a.getValor1() == null)
+            {
+                newNum(num, a.gethijoIzq());
+            } 
+            else if (a.getValor2() < num )
+            {
+                newNum(num, a.gethijoDer());
+            }           
+            else if (a.getValor1() < num && num < a.getValor2())
+            {
+                newNum(num, a.getHijoCent());
+            }
         }
-    
+        else
+        {
+            compVal(num, a);
+        }    
     }
 
     public void compVal(Integer num, BplusTree a){
@@ -116,13 +130,23 @@ public class BplusTree{
                 temp.setValor2(d);
                 a.setValor1(n);
                 a.setValor2(null);
-                temp.setSigNum(a.getSigNum());
-                a.setSigNum(temp);
-                modPadre(n, a, temp);
             }
             else if( i < n && n < d){
-                
+                temp.setValor1(n);
+                temp.setValor2(d); 
+                a.setValor1(i);
+                a.setValor2(null);
             }
+            else if ( d < n){
+                temp.setValor1(d);
+                temp.setValor2(n);
+                a.setValor1(i);
+                a.setValor2(null);
+            }
+
+            temp.setSigNum(a.getSigNum());
+            a.setSigNum(temp);
+            modPadre(n, a, temp);
         }
 
     }
@@ -214,6 +238,10 @@ public class BplusTree{
             a.getPadre().setValor2(n);
         }
     }
+
+   /* public void imprimir(BplusTree a){
+        if (a.getleaf())
+    }*/
 
     public void main(String[] args){
         
